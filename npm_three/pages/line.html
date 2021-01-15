@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draw line</title>
+  <style>
+    body { margin: 0; }
+  </style>
+
+  <script defer src="https://unpkg.com/es-module-shims@0.4.6/dist/es-module-shims.js"></script>
+  <script type="importmap-shim">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.118.1/build/three.module.js",
+      "three/examples/jsm/": "https://unpkg.com/three@0.118.1/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div><a href="../index.html">返回</a></div>
+  <!-- <div id="container"></div> -->
+  <!-- <script src="../js/three.js"></script> -->
+  <script type="module-shim">
+    // 判断是否支持 webGL
+    // import { WEBGL } from './webgl.js';
+    // if (WEBGL.isWebGLAvailable()) {
+    //   console.log('is available')
+    //   // Initiate function or other initializations here
+    //     animate();
+    // } else {
+    //   console.log('not avialbale')
+    //   const warning = WEBGL.getWebGLErrorMessage();
+    //   document.getElementById('container').appendChild(warning);
+    // }
+
+    // create a scene
+    import * as THREE from 'three';
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
+    camera.position.set(0, 0, 100);
+    camera.lookAt(0, 0, 0);
+
+    const scene = new THREE.Scene();
+
+    // create a blue LineBasicMaterial
+    const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+
+    // create geometry with points
+    const points = [];
+    points.push( new THREE.Vector3( - 10, 0, 0 ) );
+    points.push( new THREE.Vector3( 0, 10, 0 ) );
+    points.push( new THREE.Vector3( 10, 0, 0 ) );
+    const geometry = new THREE.BufferGeometry().setFromPoints( points );
+      // line
+    const line = new THREE.Line( geometry, material );
+
+    scene.add( line );
+    renderer.render( scene, camera );
+
+  </script>
+</body>
+</html>
