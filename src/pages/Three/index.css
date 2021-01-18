@@ -11,3 +11,14 @@ html, body {
   float: left;
   padding: 5px;
 }
+
+.primitivesPage {
+  width: 100%;
+  height: 100%;
+}
+.pCanvas {
+  width: 100vw;
+  height: calc(100vh - 90px);
+  margin: 0;
+  padding: 0;
+}
