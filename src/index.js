@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './pages/App/App';
 import Three from './pages/Three';
+import Primitives from './pages/Three/Primitives';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Three />
+    {/* <Three /> */}
+    <Primitives />
   </React.StrictMode>,
   document.getElementById('root')
 );
