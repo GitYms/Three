@@ -90,11 +90,41 @@ const Three = () => {
         addObject(x, y, mesh);
       }
 
-      addSolidGeometry(-2, 2, new THREE.BoxBufferGeometry(8, 8, 8)); // width, height, deep
+      // 盒子（立方体）
+      addSolidGeometry(-2, 2, new THREE.BoxBufferGeometry(8, 8, 8, 4, 4, 6)); // width, height, deep, wSegments,hSegments, dSegments
+      // 扁圆
+      const thetaStart = Math.PI * 0.05;
+      const thetaLength = Math.PI * 1.5;
+      addSolidGeometry(-1, 2, new THREE.CircleBufferGeometry(7, 24, thetaStart, thetaLength)); // radius, segments
+      // 椎体
+      addSolidGeometry(0, 2, new THREE.ConeBufferGeometry(6, 10, 16, 10, 10, true, Math.PI * 2,  Math.PI * 2 )); // radius, height, segments
+      // 圆柱                                       // radiusTop, radiusBottom, height, radialSegments
+      addSolidGeometry(1, 2, new THREE.CylinderBufferGeometry(5, 5, 8, 5))
+      // 12面体
+      addSolidGeometry(-2, 1, new THREE.DodecahedronBufferGeometry(8, 0)) // radius, detail
 
-      addSolidGeometry(-1, 2, new THREE.CircleBufferGeometry(7, 24)); // radius, segments
+      // 2d挤压形状
+      const shape = new THREE.Shape();
+      const x = -2.5;
+      const y = -5;
+      shape.moveTo(x + 2.5, y + 2.5);
+      shape.bezierCurveTo(x + 2.5, y + 2.5, x + 2, y, x, y);
+      shape.bezierCurveTo(x - 3, y, x - 3, y + 3.5, x - 3, y + 3.5);
+      shape.bezierCurveTo(x - 3, y + 5.5, x - 1.5, y + 7.7, x + 2.5, y + 9.5);
+      shape.bezierCurveTo(x + 6, y + 7.7, x + 8, y + 4.5, x + 8, y + 3.5);
+      shape.bezierCurveTo(x + 8, y + 3.5, x + 8, y, x + 5, y);
+      shape.bezierCurveTo(x + 3.5, y, x + 2.5, y + 2.5, x + 2.5, y + 2.5);
+      const extrudeSettings = {
+        steps: 2,
+        depth: 2,
+        bevelEnabled: true,
+        bevelThickness: 1,
+        bevelSize: 1,
+        bevelSegments: 2,
+      };
+      // const geometry = THREE.ExtrudeBufferGeometry(shape, extrudeSettings);
 
-      addSolidGeometry(0, 2, new THREE.ConeBufferGeometry(6, 8, 16)); // radius, height, segments
+      // addLineGeometry(-1, 1, shape);
 
       function render(time) {
         time *= 0.001;
