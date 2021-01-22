@@ -112,10 +112,7 @@ const Three = () => {
 
       // 2d挤压形状
       // 圆环
-      const geometry = new THREE.RingBufferGeometry(
-        2, 7,
-        9, 9,
-        thetaStart, thetaLength);
+      const geometry = new THREE.RingBufferGeometry( 2, 7, 9, 9, thetaStart, thetaLength);
       addSolidGeometry(1, 1, geometry);
       // 环形
       addSolidGeometry(2, 1, new THREE.TorusBufferGeometry(6, 3, 15, 5))
@@ -246,9 +243,17 @@ const Three = () => {
       addLineGeometry(-2, -2, geometry2)
       addLineGeometry(-1, -2, new THREE.WireframeGeometry(new THREE.BoxBufferGeometry(8, 8, 8, 7, 7, 7)))
 
+      // 文字
+      const loader = new THREE.FontLoader();
+      function loadFont(url) {
+        return new Promise((resolve, reject) => {
+          loader.load(url, resolve, undefined, reject);
+        });
+      }
       async function doit() {
-        const font = await loadFont('https://threejsfundamentals.org/threejs/resources/threejs/fonts/helvetiker_regular.typeface.json');
-        const geometry = new THREE.TextBufferGeometry('three.js', {
+        const fontUrl = 'https://threejsfundamentals.org/threejs/resources/threejs/fonts/helvetiker_regular.typeface.json';
+        const font = await loadFont(fontUrl);
+        const geometry = new THREE.TextBufferGeometry('hello three.js', {
           font: font,
           size: 3.0,
           height: .2,
@@ -265,7 +270,7 @@ const Three = () => {
         const parent = new THREE.Object3D();
         parent.add(mesh);
 
-        addObject(-1, -1, parent);
+        addObject(1, -2, parent);
       }
       doit();
 
